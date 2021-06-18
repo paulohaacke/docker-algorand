@@ -1,0 +1,23 @@
+name: Publish 2-buster-slim Docker Image
+on:
+  push:
+    branches: ['private-network']
+    paths: ['2.6.0/buster-slim/**']
+jobs:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: '2.6.0/buster-slim'
+          tags: paulohaacke/algorand-private-network:latest, paulohaacke/algorand-private-network:2-buster-slim, paulohaacke/algorand-private-network:2.6.0-buster-slim
