@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Create network
+goal network create -r ~/net1 -n private -t /etc/algorand/network.json
+
+# Change config.json to include "EndpointAddress"
 NODE_ENDPOINT_STRINGS=$(jq '.Nodes[] | select(.EndpointAddress!=null) | .Name,.EndpointAddress' /etc/algorand/network.json | tr '\r\n' ' ')
 IFS=', ' read -r -a NODE_ENDPOINT_ARRAY <<< "$NODE_ENDPOINT_STRINGS"
 
@@ -12,9 +16,10 @@ for i in "${!NODE_ENDPOINT_ARRAY[@]}"; do
   fi
 done
 
-goal network create -r ~/net1 -n private -t /etc/algorand/network.json
+# Start Network
 goal network start -r ~/net1
 
+# Get stdout and stderr output files
 ALGOD_PIDS=$(pidof algod)
 TAIL_FILES=""
 for pid in ${ALGOD_PIDS}; do
