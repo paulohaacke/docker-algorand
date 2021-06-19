@@ -21,4 +21,4 @@ RUN chmod +x /entrypoint.sh
 ADD network-example.json /etc/algorand/network.json
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["tail -f ${ALGOD_PROC_STD_DESCRIPTORS}"}
+CMD ["tail -f ${ALGOD_PROC_STD_DESCRIPTORS}"]
