@@ -15,14 +15,13 @@
             {
                 "Name": "Wallet3",
                 "Stake": 10,
-                "Online": false
+                "Online": true
             }
         ]
     },
     "Nodes": [
         {
-            "Name": "Primary",
-	    "EndpointAddress": "0.0.0.0:8080",
+            "Name": "Relay",
             "IsRelay": true,
             "Wallets": [
                 {
@@ -32,7 +31,7 @@
             ]
         },
         {
-            "Name": "Node",
+            "Name": "Participant",
             "Wallets": [
                 {
                     "Name": "Wallet2",
